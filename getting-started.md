@@ -76,7 +76,7 @@ Download a x86 .NET 6 runtime binaries (neither Desktop Runtime nor ASP.NET Core
 
 #### Download for Linux
 
-Microsoft does not officially a x86 runtime for Linux, so you have to find an unofficial equivalent x86 patch.
+Microsoft does not officially provide a x86 runtime for Linux, so you have to find an unofficial equivalent x86 patch.
 
 Download x86 .NET 6 runtime: [https://github.com/Servarr/dotnet-linux-x86/releases/](https://github.com/Servarr/dotnet-linux-x86/releases/).
 
