@@ -48,7 +48,7 @@ Last but not least, edit your `server.cfg` to load the plugin. In the `plugins` 
 ```
 echo Executing Server Config...
 lanmode 0
-rcon_password changeme
+rcon_password changeme123
 maxplayers 50
 port 7777
 hostname SA-MP 0.3 Server
