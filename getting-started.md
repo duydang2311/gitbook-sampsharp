@@ -1,6 +1,6 @@
 # Getting started
 
-### Create a SA:MP server directory
+## Create a SA:MP server directory.
 
 There are many SA:MP server versions that you can download and extract to create a SA:MP server directory.
 
@@ -23,10 +23,10 @@ my-server
 └── server.cfg
 ```
 
-### Install SampSharp plugin
+## Install SampSharp plugin.
 
 1. Download the latest SampSharp plugin from [https://github.com/ikkentim/SampSharp/releases](https://github.com/ikkentim/SampSharp/releases).
-2. Extract the zip content to your SA:MP server directory. After this step, your SA:MP server should look like below (I removed the files that are not from SampSharp).
+2. Extract the zip content to your SA:MP server directory. After this step, your SA:MP server should look like below (I truncated the files that are not from SampSharp).
 
 ```
 my-server
@@ -43,7 +43,7 @@ my-server
    └── SampSharp.dll
 ```
 
-Last but not least, edit your `server.cfg` to load the plugin. In the `plugins` line, pick just one that matches your OS.
+3\. Last but not least, edit your `server.cfg` to load the plugin. In the `plugins` line, pick just one that matches your OS.
 
 ```
 echo Executing Server Config...
@@ -66,21 +66,21 @@ stream_distance 300.0
 stream_rate 1000
 ```
 
-### Create .NET 6 runtime directory
+## Create .NET 6 runtime directory.
 
 To be able to run server using SampSharp, a .NET 6 runtime is required.
 
-#### Download for Windows
+### Download for Windows
 
 Download a x86 .NET 6 runtime binaries (neither Desktop Runtime nor ASP.NET Core Runtime) from [https://dotnet.microsoft.com/en-us/download/dotnet/6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).
 
-#### Download for Linux
+### Download for Linux
 
 Microsoft does not officially provide a x86 runtime for Linux, so you have to find an unofficial equivalent x86 patch.
 
 Download x86 .NET 6 runtime: [https://github.com/Servarr/dotnet-linux-x86/releases/](https://github.com/Servarr/dotnet-linux-x86/releases/).
 
-#### Create runtime directory
+### Create runtime directory
 
 Create a `runtime` directory in your SA:MP server directory, and extract the runtime binaries to the `runtime` directory.
 
@@ -101,7 +101,7 @@ my-server
 
 ```
 
-### Create a new C# project for your gamemode
+## Create a C# gamemode project.
 
 A sample of SampSharp ECS project can be found here: [https://github.com/SampSharp/sample-ecs-grandlarc](https://github.com/SampSharp/sample-ecs-grandlarc)
 
@@ -142,7 +142,7 @@ Finally, in `MyProject` project directory, run `dotnet restore` to install depen
 
 I will be using the sample code from [https://github.com/SampSharp/sample-ecs-grandlarc](https://github.com/SampSharp/sample-ecs-grandlarc) with adjustments for minimal working program.
 
-* Edit your `Program.cs`:
+1. Edit your `Program.cs`:
 
 ```csharp
 using SampSharp.Core;
@@ -164,7 +164,7 @@ namespace MyProject
 }
 ```
 
-* Create a `Startup.cs` file and paste in the content:
+2\. Create a `Startup.cs` file at the same location as `Program.cs` with the content:
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
@@ -192,7 +192,11 @@ namespace MyProject
 
 ```
 
-* In your project directory, run `dotnet build`. You should see the build output in `gamemode` directory in your SA:MP server directory. Continue to execute `dotnet run` to start your server.
+3\. In your project directory, run `dotnet build`.
+
+You should see the build output in `gamemode` directory in your SA:MP server directory.
+
+4\. Execute `dotnet run` to start running the SA:MP server.
 
 This should be what your `server_log.txt` looks like after all these steps:
 
