@@ -2,13 +2,13 @@
 
 This documentation is written based on my knowledge and experience while working with [SampSharp](https://sampsharp.net/). Hopefully this would help you get started with the framework easier.
 
-## What is SampSharp?
+### What is SampSharp?
 
 In case you visit this site by accident and don't know what [SampSharp](https://sampsharp.net/) is, here's a brief summary by Tim Potze (the author):
 
 > SampSharp is a framework for writing game modes for SA-MP in C#.&#x20;
 
-## Choose a SampSharp framework to work with
+### Choose a SampSharp framework to work with
 
 SampSharp provides 2 frameworks for SA:MP development: GameMode and ECS (Entity-Component-System).
 

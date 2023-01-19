@@ -6,65 +6,68 @@ There are many SA:MP server versions that you can download and extract to create
 
 1. Download the latest server version from [https://sa-mp.com/download.php](https://sa-mp.com/download.php) that corresponds with your operating system.
 2. Extract it to a directory, e.g. `my-server`.
-3. If there is any redundant directory, like `samp03`, make sure to move its content outside so it looks similar to mine.
+3.  If there is any redundant directory, like `samp03`, make sure to move its content outside so it looks similar to mine.\
 
-```
-my-server
-├── announce
-├── filterscripts
-├── gamemodes
-├── include
-├── LICENSE
-├── npcmodes
-├── README
-├── samp-npc
-├── samp03svr
-├── scriptfiles
-└── server.cfg
-```
+
+    ```
+    my-server
+    ├── announce
+    ├── filterscripts
+    ├── gamemodes
+    ├── include
+    ├── LICENSE
+    ├── npcmodes
+    ├── README
+    ├── samp-npc
+    ├── samp03svr
+    ├── scriptfiles
+    └── server.cfg
+    ```
 
 ## Install SampSharp plugin.
 
 1. Download the latest SampSharp plugin from [https://github.com/ikkentim/SampSharp/releases](https://github.com/ikkentim/SampSharp/releases).
-2. Extract the zip content to your SA:MP server directory. After this step, your SA:MP server should look like below (I truncated the files that are not from SampSharp).
+2.  Extract the zip content to your SA:MP server directory. After this step, your SA:MP server should look like below (I truncated the files that are not from SampSharp).\
 
-```
-my-server
-├── filterscripts
-│  ├── empty.amx
-│  ├── empty.pwn
-│  ├── intermission.amx
-│  ├── intermission.pwn
-├── gamemodes
-│  ├── empty.amx
-│  ├── empty.pwn
-└── plugins
-   ├── libSampSharp.so
-   └── SampSharp.dll
-```
 
-3\. Last but not least, edit your `server.cfg` to load the plugin. In the `plugins` line, pick just one that matches your OS.
+    ```
+    my-server
+    ├── filterscripts
+    │  ├── empty.amx
+    │  ├── empty.pwn
+    │  ├── intermission.amx
+    │  ├── intermission.pwn
+    ├── gamemodes
+    │  ├── empty.amx
+    │  ├── empty.pwn
+    └── plugins
+       ├── libSampSharp.so
+       └── SampSharp.dll
+    ```
 
-```
-echo Executing Server Config...
-lanmode 0
-rcon_password changeme123
-maxplayers 50
-port 7777
-hostname SA-MP 0.3 Server
-gamemode0 empty 1
-plugins SampSharp.dll # windows
-plugins libSampSharp.so # linux
-announce 0
-query 1
-weburl www.sa-mp.com
-maxnpc 0
-onfoot_rate 40
-incar_rate 40
-weapon_rate 40
-stream_distance 300.0
-stream_rate 1000
-```
+
+3.  Last but not least, edit your `server.cfg` to load the plugin. In the `plugins` line, pick just one that matches your OS.\
+
+
+    <pre data-title="server.cfg"><code>echo Executing Server Config...
+    <strong>lanmode 0
+    </strong>rcon_password changeme123
+    maxplayers 50
+    port 7777
+    hostname SA-MP 0.3 Server
+    gamemode0 empty 1
+    plugins SampSharp.dll # windows
+    plugins libSampSharp.so # linux
+    announce 0
+    query 1
+    weburl www.sa-mp.com
+    maxnpc 0
+    onfoot_rate 40
+    incar_rate 40
+    weapon_rate 40
+    stream_distance 300.0
+    stream_rate 1000
+    </code></pre>
 
 ## Create .NET 6 runtime directory.
 
@@ -142,63 +145,65 @@ Finally, in `MyProject` project directory, run `dotnet restore` to install depen
 
 I will be using the sample code from [https://github.com/SampSharp/sample-ecs-grandlarc](https://github.com/SampSharp/sample-ecs-grandlarc) with adjustments for minimal working program.
 
-1. Edit your `Program.cs`:
+1.  Edit your the program entry file:\
 
-```csharp
-using SampSharp.Core;
-using SampSharp.Entities;
 
-namespace MyProject
-{
-    public class Program
+    <pre class="language-csharp" data-title="Program.cs"><code class="lang-csharp">using SampSharp.Core;
+    <strong>using SampSharp.Entities;
+    </strong>
+    namespace MyProject
     {
-        private static void Main()
+        public class Program
         {
-            // This is the main entry-point of this application.
-            // Start SampSharp with the ECS configuration provided by th Startup class.
-            new GameModeBuilder()
-                .UseEcs<Startup>()
-                .Run();
+            private static void Main()
+            {
+                // This is the main entry-point of this application.
+                // Start SampSharp with the ECS configuration provided by th Startup class.
+                new GameModeBuilder()
+                    .UseEcs&#x3C;Startup>()
+                    .Run();
+            }
         }
     }
-}
-```
+    </code></pre>
 
-2\. Create a `Startup.cs` file at the same location as `Program.cs` with the content:
 
-```csharp
-using Microsoft.Extensions.DependencyInjection;
-using SampSharp.Entities;
-using SampSharp.Entities.SAMP;
+2.  Create a file for startup class at the same location as `Program.cs` with the content:\
 
-namespace MyProject
-{
-    /// <summary>
-    /// Represents a class which provides the configuration for the ECS game mode.
-    /// </summary>
-    public class Startup : IStartup
+
+    {% code title="Startup.cs" %}
+    ```csharp
+    using Microsoft.Extensions.DependencyInjection;
+    using SampSharp.Entities;
+    using SampSharp.Entities.SAMP;
+
+    namespace MyProject
     {
-        public void Configure(IServiceCollection services)
+        /// <summary>
+        /// Represents a class which provides the configuration for the ECS game mode.
+        /// </summary>
+        public class Startup : IStartup
         {
-        }
+            public void Configure(IServiceCollection services)
+            {
+            }
 
-        public void Configure(IEcsBuilder builder)
-        {
-            // Enable or disable features of ECS or other libraries here.
-            builder.EnableSampEvents(); // Enable all stock SA-MP callbacks as events which can be listened to by systems.
+            public void Configure(IEcsBuilder builder)
+            {
+                // Enable or disable features of ECS or other libraries here.
+                builder.EnableSampEvents(); // Enable all stock SA-MP callbacks as events which can be listened to by systems.
+            }
         }
     }
-}
 
-```
+    ```
+    {% endcode %}
 
-3\. In your project directory, run `dotnet build`.
 
-You should see the build output in `gamemode` directory in your SA:MP server directory.
-
-4\. Execute `dotnet run` to start running the SA:MP server.
-
-This should be what your `server_log.txt` looks like after all these steps:
+3. In your project directory, run `dotnet build`.\
+   You should see the build output in `gamemode` directory in your SA:MP server directory.
+4. Execute `dotnet run` to start running the SA:MP server.\
+   This should be what your `server_log.txt` looks like after all these steps:
 
 ```
 SA-MP Dedicated Server
