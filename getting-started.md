@@ -148,9 +148,11 @@ I will be using the sample code from [https://github.com/SampSharp/sample-ecs-gr
 1.  Edit your the program entry file:\
 
 
-    <pre class="language-csharp" data-title="Program.cs"><code class="lang-csharp">using SampSharp.Core;
-    <strong>using SampSharp.Entities;
-    </strong>
+    {% code title="Program.cs" %}
+    ```csharp
+    using SampSharp.Core;
+    using SampSharp.Entities;
+
     namespace MyProject
     {
         public class Program
@@ -160,12 +162,13 @@ I will be using the sample code from [https://github.com/SampSharp/sample-ecs-gr
                 // This is the main entry-point of this application.
                 // Start SampSharp with the ECS configuration provided by th Startup class.
                 new GameModeBuilder()
-                    .UseEcs&#x3C;Startup>()
+                    .UseEcs<Startup>()
                     .Run();
             }
         }
     }
-    </code></pre>
+    ```
+    {% endcode %}
 
 
 2.  Create a file for startup class at the same location as `Program.cs` with the content:\
