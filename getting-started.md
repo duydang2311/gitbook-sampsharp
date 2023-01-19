@@ -30,35 +30,34 @@ There are many SA:MP server versions that you can download and extract to create
 2.  Extract the zip content to your SA:MP server directory. After this step, your SA:MP server should look like below (I truncated the files that are not from SampSharp).\
 
 
-    ```
-    my-server
+    <pre><code>my-server
     ├── filterscripts
     │  ├── empty.amx
     │  ├── empty.pwn
     │  ├── intermission.amx
     │  ├── intermission.pwn
-    ├── gamemodes
-    │  ├── empty.amx
-    │  ├── empty.pwn
-    └── plugins
-       ├── libSampSharp.so
-       └── SampSharp.dll
-    ```
+    <strong>├── gamemodes
+    </strong><strong>│  ├── empty.amx
+    </strong><strong>│  ├── empty.pwn
+    </strong><strong>└── plugins
+    </strong><strong>   ├── libSampSharp.so
+    </strong><strong>   └── SampSharp.dll
+    </strong></code></pre>
 
 
 3.  Last but not least, edit your `server.cfg` to load the plugin. In the `plugins` line, pick just one that matches your OS.\
 
 
     <pre data-title="server.cfg"><code>echo Executing Server Config...
-    <strong>lanmode 0
-    </strong>rcon_password changeme123
+    lanmode 0
+    rcon_password changeme123
     maxplayers 50
     port 7777
     hostname SA-MP 0.3 Server
     gamemode0 empty 1
-    plugins SampSharp.dll # windows
-    plugins libSampSharp.so # linux
-    announce 0
+    <strong>plugins SampSharp.dll # windows
+    </strong><strong>plugins libSampSharp.so # linux
+    </strong>announce 0
     query 1
     weburl www.sa-mp.com
     maxnpc 0
@@ -89,20 +88,19 @@ Create a `runtime` directory in your SA:MP server directory, and extract the run
 
 The layout of the server directory after this step (truncated).
 
-```
-my-server
-└── runtime
-   ├── dotnet
-   ├── host
-   │  └── fxr
-   │     └── 6.0.12
-   ├── LICENSE.txt
-   ├── shared
-   │  └── Microsoft.NETCore.App
-   │     └── 6.0.12
-   └── ThirdPartyNotices.txt
-
-```
+<pre><code>my-server
+<strong>└── runtime
+</strong><strong>   ├── dotnet
+</strong><strong>   ├── host
+</strong><strong>   │  └── fxr
+</strong><strong>   │     └── 6.0.12
+</strong><strong>   ├── LICENSE.txt
+</strong><strong>   ├── shared
+</strong><strong>   │  └── Microsoft.NETCore.App
+</strong><strong>   │     └── 6.0.12
+</strong><strong>   └── ThirdPartyNotices.txt
+</strong>
+</code></pre>
 
 ## Create a C# gamemode project.
 
@@ -114,30 +112,29 @@ Alternatively, if you want to create a C# project on your own using the [.NET CL
 2. Make sure your current working directory is located at `src` directory, then create a C# console project with: `dotnet new console -n MyProject`.
 3. Configure your `MyProject.csproj` to use .NET 6; install SampSharp nuget packages; specify output path and start program.&#x20;
 
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <OutputPath>..\..\gamemode</OutputPath>
-    <StartAction>Program</StartAction>
-    <StartWorkingDirectory>..\..\</StartWorkingDirectory>
+<pre class="language-xml"><code class="lang-xml">&#x3C;Project Sdk="Microsoft.NET.Sdk">
+  &#x3C;PropertyGroup>
+    &#x3C;OutputType>Exe&#x3C;/OutputType>
+    &#x3C;TargetFramework>net6.0&#x3C;/TargetFramework>
+    &#x3C;ImplicitUsings>enable&#x3C;/ImplicitUsings>
+    &#x3C;Nullable>enable&#x3C;/Nullable>
+    &#x3C;OutputPath>..\..\gamemode&#x3C;/OutputPath>
+    &#x3C;StartAction>Program&#x3C;/StartAction>
+    &#x3C;StartWorkingDirectory>..\..\&#x3C;/StartWorkingDirectory>
     
-    <!-- Linux -->
-    <!-- <StartProgram>..\..\samp03svr</StartProgram> -->
-    
-    <!-- Windows -->
-    <!-- <StartProgram>..\..\samp-server.exe</StartProgram> -->
-    
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="SampSharp.Entities" Version="0.10.1" />
-  </ItemGroup>
-</Project>
+<strong>    &#x3C;!-- Linux -->
+</strong><strong>    &#x3C;!-- &#x3C;StartProgram>..\..\samp03svr&#x3C;/StartProgram> -->
+</strong>    
+<strong>    &#x3C;!-- Windows -->
+</strong><strong>    &#x3C;!-- &#x3C;StartProgram>..\..\samp-server.exe&#x3C;/StartProgram> -->
+</strong>    
+  &#x3C;/PropertyGroup>
+  &#x3C;ItemGroup>
+    &#x3C;PackageReference Include="SampSharp.Entities" Version="0.10.1" />
+  &#x3C;/ItemGroup>
+&#x3C;/Project>
 
-```
+</code></pre>
 
 Finally, in `MyProject` project directory, run `dotnet restore` to install dependencies for the project.
 
