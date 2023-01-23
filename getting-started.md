@@ -1,6 +1,6 @@
 # Getting started
 
-## Create a SA:MP server directory.
+## Create a SA:MP server directory
 
 There are many SA:MP server versions that you can download and extract to create a SA:MP server directory.
 
@@ -24,7 +24,7 @@ There are many SA:MP server versions that you can download and extract to create
     └── server.cfg
     ```
 
-## Install SampSharp plugin.
+## Install SampSharp plugin
 
 1. Download the latest SampSharp plugin from [https://github.com/ikkentim/SampSharp/releases](https://github.com/ikkentim/SampSharp/releases).
 2.  Extract the zip content to your SA:MP server directory. After this step, your SA:MP server should look like below (I truncated the files that are not from SampSharp).\
@@ -68,7 +68,7 @@ There are many SA:MP server versions that you can download and extract to create
     stream_rate 1000
     </code></pre>
 
-## Create .NET 6 runtime directory.
+## Create .NET 6 runtime directory
 
 To be able to run server using SampSharp, a .NET 6 runtime is required.
 
@@ -102,7 +102,7 @@ The layout of the server directory after this step (truncated).
 </strong>
 </code></pre>
 
-## Create a C# gamemode project.
+## Create a C# gamemode project
 
 A sample of SampSharp ECS project can be found here: [https://github.com/SampSharp/sample-ecs-grandlarc](https://github.com/SampSharp/sample-ecs-grandlarc)
 
