@@ -44,46 +44,75 @@ It's time to write your first system with the SampSharp ECS framework that spawn
 
 3.  Write the code for spawning the player.
 
-    {% code title="SpawnSystem.cs" %}
-    ```csharp
+    <pre class="language-csharp" data-title="SpawnSystem.cs"><code class="lang-csharp">[Event]
     private void OnPlayerConnect(Player player)
     {
-        player.SetSpawnInfo(255, 0, new Vector3(0, 0, 3), 0);
-        player.Spawn();
-    }
-    ```
-    {% endcode %}
+    <strong>    player.SetSpawnInfo(255, 0, new Vector3(0, 0, 3), 0);
+    </strong><strong>    player.Spawn();
+    </strong>}
+    </code></pre>
 
     \
     In this [OO](https://en.wikipedia.org/wiki/Object-oriented\_programming) piece of code, we:
 
-    1.  Set the player's spawn info with this method in the `Player` class:\
-        `SetSpawnInfo(int team, int skin, Vector3 position, float rotation, Weapon weapon1 = Weapon.None, int weapon1Ammo = 0, Weapon weapon2 = Weapon.None, int weapon2Ammo = 0, Weapon weapon3 = Weapon.None, int weapon3Ammo = 0)` .
+    1.  Set the player's spawn info using the method that comes with `Player` class:
 
-        * `team`: 255 or NO\_TEAM according to [this](https://www.open.mp/docs/scripting/functions/SetPlayerTeam).
-        * `skin`: `0` for CJ skin.
-        * `position`: a `Vector3` with `X`, `Y`, `Z` coordinates correspond to `0`, `0`, `3`.
-        * `rotation`: `0`.
+        ```csharp
+        public void SetSpawnInfo(int team, int skin, Vector3 position, float rotation, Weapon weapon1 = Weapon.None, int weapon1Ammo = 0, Weapon weapon2 = Weapon.None, int weapon2Ammo = 0, Weapon weapon3 = Weapon.None, int weapon3Ammo = 0)
+        ```
 
-        We can leave out the rest parameters that already have default value.
-    2. Spawn the player with the `Spawn` method.
-4.  Last but not least, send a greeting message to our player after spawning them.
 
-    {% code title="SpawnSystem.cs" %}
-    ```csharp
+
+        > * `team`: 255 or NO\_TEAM according to [this](https://www.open.mp/docs/scripting/functions/SetPlayerTeam).
+        > * `skin`: `0` for CJ skin.
+        > * `position`: a `Vector3` with `X`, `Y`, `Z` coordinates correspond to `0`, `0`, `3`.
+        > * `rotation`: `0`.
+
+        \
+        And we leave out the rest parameters that already have default value.
+    2. Spawn the player with a very simple `Spawn` method.\
+
+4.  Send a nice greeting message to our player after spawning them.
+
+    <pre class="language-csharp" data-title="SpawnSystem.cs"><code class="lang-csharp">[Event]
     private void OnPlayerConnect(Player player)
     {
         player.SetSpawnInfo(255, 0, new Vector3(0, 0, 3), 0);
         player.Spawn();
-        player.SendClientMessage(Color.Green, "Hello from SampSharp!");
-    }
-    ```
-    {% endcode %}
+    <strong>    player.SendClientMessage(Color.Green, "Hello from SampSharp!");
+    </strong>}
+    </code></pre>
 
     \
-    We just simply pass what is required to the argument according to this definition:\
-    `SendClientMessage(Color color, string message)`
+    From this declaration in the `Player` class:
 
-    * `color`: `Color.Green` returns an instance of type `Color` that has its `R`, `G`, `B` values defining a green color.
-    * `message`: `"Hello from SampSharp!"` is a literal string, which is of course a string.
-5. Build the code, run the server, go in-game and test what we've done after all these steps.
+    ```csharp
+    public void SendClientMessage(Color color, string message);
+    ```
+
+    \
+    To use it, we simply pass these required arguments:\
+
+
+    > * `color`: The color of the message.\
+    >   `Color.Green` returns an instance of struct `Color` that has its `R`, `G`, `B` values defining a green color.
+    > * `message`: The text of the message.\
+    >   `"Hello from SampSharp!"` is a literal string, which is of course a string.\
+    >
+
+    \
+    It's supposed to be working if we build the current code, run the server and go in the game.\
+    However, you won't be spawn and received any message on connecting at all.\
+    It turns out that our system was never loaded on startup by SampSharp, although the system implements the `ISystem` interface, which takes us to the final step below.
+5.  Add these lines to`Startup.cs` to load all systems in our project assembly.
+
+    <pre class="language-csharp"><code class="lang-csharp">public void Configure(IServiceCollection services)
+    {
+    <strong>    services.AddSystemsInAssembly(); // Add all systems which can be found within our project.
+    </strong>}
+    </code></pre>
+
+    \
+    `AddSystemsInAssembly` is a method extension for `IServiceCollection` type, that scans the executing assembly to look for all types that implement `ISystem` interface, then eventually add them as system.
+
+Now, congrats on your first system ever written with the ECS framework!
