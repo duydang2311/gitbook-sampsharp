@@ -57,9 +57,11 @@ It's time to write your first system with the SampSharp ECS framework that spawn
 
     1.  Set the player's spawn info using the method that comes with `Player` class:
 
+        {% code overflow="wrap" %}
         ```csharp
         public void SetSpawnInfo(int team, int skin, Vector3 position, float rotation, Weapon weapon1 = Weapon.None, int weapon1Ammo = 0, Weapon weapon2 = Weapon.None, int weapon2Ammo = 0, Weapon weapon3 = Weapon.None, int weapon3Ammo = 0)
         ```
+        {% endcode %}
 
 
 
@@ -107,7 +109,7 @@ It's time to write your first system with the SampSharp ECS framework that spawn
 
 5.  Add these lines to`Startup.cs` to load all systems in our project assembly.
 
-    <pre class="language-csharp"><code class="lang-csharp">public void Configure(IServiceCollection services)
+    <pre class="language-csharp" data-overflow="wrap"><code class="lang-csharp">public void Configure(IServiceCollection services)
     {
     <strong>    services.AddSystemsInAssembly(); // Add all systems which can be found within our project.
     </strong>}
