@@ -64,5 +64,7 @@ The purpose of some common layers inside any top-level namespace is as follows:
    This layer I use to contain model classes for the EF core.&#x20;
 4. Systems\
    This layer contains system classes that handle the logic of our gamemode. Knowing that a system can fire its own event for others to use, so putting events along their related system is reasonable to me.
+5. Services\
+   This layer contains service classes that handle some functionality of the gamemode, encapsulate all the business logic, and is made to serve other classes in the project. I personally also put factory classes in this layer, because it shares some similar purpose and I don't have any reason to split it any further into service layer and factory layer.
 
 Finally, you are totally free on what you want your project structure to be like. If you haven't thought of any, feel free to consider this as a reference for your own structure design.
