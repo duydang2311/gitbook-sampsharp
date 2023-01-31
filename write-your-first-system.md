@@ -103,7 +103,8 @@ It's time to write your first system with the SampSharp ECS framework that spawn
     \
     It's supposed to be working if we build the current code, run the server and go in the game.\
     However, you won't be spawn and received any message on connecting at all.\
-    It turns out that our system was never loaded on startup by SampSharp, although the system implements the `ISystem` interface, which takes us to the final step below.
+    It turns out that our system was never loaded on startup by SampSharp, although the system implements the `ISystem` interface, which takes us to the final step below.\
+
 5.  Add these lines to`Startup.cs` to load all systems in our project assembly.
 
     <pre class="language-csharp"><code class="lang-csharp">public void Configure(IServiceCollection services)
