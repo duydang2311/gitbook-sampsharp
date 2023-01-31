@@ -99,15 +99,13 @@ It's time to write your first system with the SampSharp ECS framework that spawn
     > * `color`: The color of the message.\
     >   `Color.Green` returns an instance of struct `Color` that has its `R`, `G`, `B` values defining a green color.
     > * `message`: The text of the message.\
-    >   `"Hello from SampSharp!"` is a literal string, which is of course a string.\
-    >
+    >   `"Hello from SampSharp!"` is a literal string, which is of course a string.
 
     \
-    It's supposed to be working if we build the current code, run the server and go in the game.\
-    However, you won't be spawn and received any message on connecting at all.\
-    It turns out that our system was never loaded on startup by SampSharp, although the system implements the `ISystem` interface, which takes us to the final step below.\
+    It's supposed to be working if we build the current code, run the server and go in the game. However, you won't be spawn and received any message on connecting at all.\
+    It turns out that we've never asked SampSharp to load our system on startup before. The fact that our class implements `ISystem` does not matter, if we don't tell SampSharp to look for them, which takes us to the final step.\
 
-5.  Add these lines to`Startup.cs` to load all systems in our project assembly.
+5.  Add this line to`Startup.cs` to load all systems in our project assembly.
 
     <pre class="language-csharp" data-overflow="wrap"><code class="lang-csharp">public void Configure(IServiceCollection services)
     {
@@ -116,6 +114,6 @@ It's time to write your first system with the SampSharp ECS framework that spawn
     </code></pre>
 
     \
-    `AddSystemsInAssembly` is a method extension for `IServiceCollection` type, that scans the executing assembly to look for all types that implement `ISystem` interface, then eventually add them as system.
+    `AddSystemsInAssembly` is a method extension for `IServiceCollection` type, that scans the executing assembly to look for all types that implement `ISystem` interface, then eventually add them as system to the service collection.
 
-Now, congrats on your first system ever written with the ECS framework!
+Finally, congrats on your first system ever written with the ECS framework!
