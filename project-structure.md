@@ -52,7 +52,9 @@ Server
    └── Systems
 ```
 
-If a top-level namespace gets too big, further split will eventually be done, although I haven't needed to break up any of them twice so far.
+In the above structure, account authentication, login, sign up, model and component code all function on an account. That's the reason why they are grouped in a same functional area called "Account", and certainly, they are then divided one more time by applying the layered style.
+
+I call a same functional area a top-level namespace, e.g. "Account", "Character", "Chat" in this case. If a top-level namespace gets too big, further split should eventually be done.
 
 The purpose of some common layers inside any top-level namespace is as follows:
 
